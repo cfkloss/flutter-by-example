@@ -111,7 +111,7 @@ class Address {
 Future<List<User>> fetchAndParseUsers() async {
   var res = await http.get(jsonEndpoint);
   var jsonStr = res.body;
-  var parsedUserList = JSON.decode(jsonStr);
+  var parsedUserList = json.decode(jsonStr);
   var userList = <User>[];
   parsedUserList.forEach((parsedUser) {
     userList.add(
