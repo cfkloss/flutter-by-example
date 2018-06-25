@@ -112,11 +112,8 @@ Future<List<User>> fetchAndParseUsers() async {
   var res = await http.get(jsonEndpoint);
   var jsonStr = res.body;
   var parsedUserList = json.decode(jsonStr);
-  var userList = <User>[];
-  parsedUserList.forEach((parsedUser) {
-    userList.add(
-      new User.fromJsonMap(parsedUser)
-    );
-  });
+  var userList = parsedUserList
+      .map<User>((parsedUser) => User.fromJsonMap(parsedUser))
+      .toList();
   return userList;
 }
