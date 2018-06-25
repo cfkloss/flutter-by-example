@@ -6,7 +6,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -36,7 +35,6 @@ class UserListPage extends StatefulWidget {
 }
 
 class UserListState extends State<UserListPage> {
-
   var userWidgets = <Widget>[];
 
   @override
@@ -46,17 +44,12 @@ class UserListState extends State<UserListPage> {
   }
 
   _getUsers() async {
-
     List<Widget> widgets = [];
     var userList = await fetchAndParseUsers();
-    userList.forEach((user) =>
-      widgets.add(
-        new ListTile(
+    userList.forEach((user) => widgets.add(new ListTile(
           title: new Text(user.name),
           subtitle: new Text(user.address.toString()),
-        )
-      )
-    );
+        )));
 
     setState(() => this.userWidgets = widgets);
   }
@@ -64,11 +57,10 @@ class UserListState extends State<UserListPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('List Example'),
-      ),
-      body: new ListView(children: userWidgets)
-    );
+        appBar: new AppBar(
+          title: new Text('List Example'),
+        ),
+        body: new ListView(children: userWidgets));
   }
 }
 
@@ -81,10 +73,10 @@ class User {
   final String userName;
   final Address address;
 
-  User.fromJsonMap(Map jsonMap) :
-    name = jsonMap['name'],
-    userName = jsonMap['username'],
-    address = new Address.fromJsonMap(jsonMap['address']);
+  User.fromJsonMap(Map jsonMap)
+      : name = jsonMap['name'],
+        userName = jsonMap['username'],
+        address = new Address.fromJsonMap(jsonMap['address']);
 
   String toString() {
     return 'name: $name\nuser name: $userName\naddress: $address';
@@ -97,11 +89,11 @@ class Address {
   final String city;
   final String zipcode;
 
-  Address.fromJsonMap(Map jsonMap) :
-    street = jsonMap['street'],
-    suite = jsonMap['suite'],
-    city = jsonMap['city'],
-    zipcode = jsonMap['zipcode'];
+  Address.fromJsonMap(Map jsonMap)
+      : street = jsonMap['street'],
+        suite = jsonMap['suite'],
+        city = jsonMap['city'],
+        zipcode = jsonMap['zipcode'];
 
   String toString() {
     return '$street, $suite, $city, $zipcode';
